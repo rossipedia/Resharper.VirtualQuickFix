@@ -12,7 +12,10 @@
         {
             if (element.ShouldBeVirtual())
             {
-                consumer.AddHighlighting(new MakePropertyVirtualHighlighting(element, element.GetFirstTokenIn().GetDocumentRange()), element.GetContainingFile());
+                var range = element.ModifiersList.GetFirstTokenIn().GetDocumentRange();
+                var containingFile = element.GetContainingFile();
+                var highlighting = new MakePropertyVirtualHighlighting(element, range);
+                consumer.AddHighlighting(highlighting, containingFile);
             }
         }
     }
