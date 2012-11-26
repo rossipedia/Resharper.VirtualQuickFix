@@ -1,6 +1,6 @@
 ## Resharper.VirtualQuickFix
 
-This is a simple plugin based on Hadi Hariri's blog post on creating plugins for [ReSharper][2]. I actually had a need for this in one of my projects, so I figured I'd try my hand at the plugin. Unfortunately, it was written for an older version of ReSharper and didn't translate exactly. So this is an updated version of the plugin for ReSharper Version 7.x
+This is a simple plugin based on [Hadi Hariri's blog post][1] on creating plugins for [ReSharper][2]. I actually had a need for this in one of my projects, so I figured I'd try my hand at the plugin. Unfortunately, it was written for an older version of ReSharper and didn't translate exactly. So this is an updated version of the plugin for ReSharper Version 7.x
 
 ### Features
 
