@@ -23,6 +23,7 @@
         public static bool ShouldBeVirtual(this IPropertyDeclaration declaration)
         {
             return declaration.GetAccessRights() == AccessRights.PUBLIC
+                && !declaration.GetContainingTypeDeclaration().IsSealed
                 && !declaration.IsStatic
                 && !declaration.IsVirtual
                 && !declaration.IsOverride;
