@@ -12,7 +12,7 @@ using JetBrains.Application.PluginSupport;
 [assembly: AssemblyCopyright("Copyright © Bryan J. Ross, 2012")]
 
 
-[assembly: AssemblyVersion("1.0.1.*")]
+[assembly: AssemblyVersion("1.0.3.*")]
 
 [assembly: ActionsXml("Resharper.VirtualQuickFix.Actions.xml")]
 

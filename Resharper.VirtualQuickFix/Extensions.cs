@@ -1,4 +1,13 @@
-﻿namespace Resharper.VirtualQuickFix
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Extensions.cs" company="Whitestone TEC">
+//   (c) Whitestone, TEC. All rights reserved.
+// </copyright>
+// <summary>
+//   The extensions.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace Resharper.VirtualQuickFix
 {
     using JetBrains.ReSharper.Psi;
     using JetBrains.ReSharper.Psi.CSharp.Tree;
@@ -6,27 +15,15 @@
     /// <summary>The extensions.</summary>
     public static class Extensions
     {
-        /// <summary>The should be virtual.</summary>
+        /// <summary>Determines if a method declaration should be marked as virtual</summary>
         /// <param name="declaration">The declaration.</param>
-        /// <returns>The <see cref="bool"/>.</returns>
-        public static bool ShouldBeVirtual(this IMethodDeclaration declaration)
+        /// <returns><c>True</c> if the method should be virtualized, otherwise <c>false</c>.</returns>
+        public static bool ShouldBeVirtual<T>(this T declaration)
+            where T : IAccessRightsOwner, ICSharpTypeMemberDeclaration, IModifiersOwner
         {
             return declaration.GetAccessRights() == AccessRights.PUBLIC
-                && !declaration.IsStatic
-                && !declaration.IsVirtual
-                && !declaration.IsOverride;
-        }
-
-        /// <summary>The should be virtual.</summary>
-        /// <param name="declaration">The declaration.</param>
-        /// <returns>The <see cref="bool" />.</returns>
-        public static bool ShouldBeVirtual(this IPropertyDeclaration declaration)
-        {
-            return declaration.GetAccessRights() == AccessRights.PUBLIC
-                && !declaration.GetContainingTypeDeclaration().IsSealed
-                && !declaration.IsStatic
-                && !declaration.IsVirtual
-                && !declaration.IsOverride;
+                   && !declaration.GetContainingTypeDeclaration().IsSealed
+                   && !(declaration.IsStatic || declaration.IsVirtual || declaration.IsOverride);
         }
     }
 }

@@ -16,12 +16,8 @@ namespace Resharper.VirtualQuickFix
     {
         public const string SeverityId = "VirtualQuickFixCanBeVirtual";
 
-        public const string MethodToolTip = "Public methods should be virtual";
+        public const string ToolTip = "Public methods/properties should be virtual";
 
-        public const string MethodQuickFix = "Make method virtual";
-
-        public const string PropertyToolTip = "Public properties should be virtual";
-
-        public const string PropertyQuickFix = "Make property virtual";
+        public const string QuickFix = "Make member virtual";
     }
 }

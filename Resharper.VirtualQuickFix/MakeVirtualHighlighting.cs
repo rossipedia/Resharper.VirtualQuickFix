@@ -4,38 +4,40 @@ namespace Resharper.VirtualQuickFix
     using JetBrains.ReSharper.Daemon;
     using JetBrains.ReSharper.Daemon.Impl;
     using JetBrains.ReSharper.Psi.CSharp;
-    using JetBrains.ReSharper.Psi.CSharp.Tree;
+    using JetBrains.ReSharper.Psi.Tree;
 
     [ConfigurableSeverityHighlighting(Highlight.SeverityId, CSharpLanguage.Name)]
-    public class MakeMethodVirtualHighlighting : IHighlightingWithRange
+    public class MakeVirtualHighlighting<T> : IHighlightingWithRange
+        where T : ITreeNode, IModifiersOwnerDeclaration
+
     {
-        private readonly IMethodDeclaration method;
+        private readonly T declaration;
 
         private readonly DocumentRange range;
 
-        public MakeMethodVirtualHighlighting(IMethodDeclaration method, DocumentRange range)
+        public MakeVirtualHighlighting(T declaration, DocumentRange range)
         {
-            this.method = method;
+            this.declaration = declaration;
             this.range = range;
         }
 
         public bool IsValid()
         {
-            return this.Method.IsValid();
+            return this.Declaration.IsValid();
         }
 
         public string ToolTip
         {
-            get { return Highlight.MethodToolTip; }
+            get { return Highlight.ToolTip; }
         }
 
         public string ErrorStripeToolTip { get { return this.ToolTip; } }
 
         public int NavigationOffsetPatch { get { return 0; } }
 
-        public IMethodDeclaration Method
+        public T Declaration
         {
-            get { return this.method; }
+            get { return this.declaration; }
         }
 
         public DocumentRange CalculateRange()

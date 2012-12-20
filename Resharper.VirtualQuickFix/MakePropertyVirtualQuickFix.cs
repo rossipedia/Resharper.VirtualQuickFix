@@ -1,38 +1,14 @@
 ﻿namespace Resharper.VirtualQuickFix
 {
-    using System;
-
-    using JetBrains.Application.Progress;
-    using JetBrains.ProjectModel;
     using JetBrains.ReSharper.Feature.Services.Bulbs;
-    using JetBrains.ReSharper.Intentions.Extensibility;
-    using JetBrains.TextControl;
-    using JetBrains.Util;
+    using JetBrains.ReSharper.Psi.CSharp.Tree;
 
     [QuickFix]
-    public class MakePropertyVirtualQuickFix : QuickFixBase
+    public class MakePropertyVirtualQuickFix : MakeVirtualQuickFix<IPropertyDeclaration>
     {
-        private readonly MakePropertyVirtualHighlighting highlight;
-
-        public MakePropertyVirtualQuickFix(MakePropertyVirtualHighlighting highlight)
+        public MakePropertyVirtualQuickFix(MakeVirtualHighlighting<IPropertyDeclaration> highlight)
+            : base(highlight)
         {
-            this.highlight = highlight;
-        }
-
-        protected override Action<ITextControl> ExecutePsiTransaction(ISolution solution, IProgressIndicator progress)
-        {
-            this.highlight.Property.SetVirtual(true);
-            return null;
-        }
-
-        public override string Text
-        {
-            get { return Highlight.PropertyQuickFix; }
-        }
-
-        public override bool IsAvailable(IUserDataHolder cache)
-        {
-            return this.highlight.Property.IsValid();
         }
     }
 }
